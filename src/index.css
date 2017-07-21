@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #2a3e51;
+  color: #fff;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nav-wrapper {
+  background: #e16900;
+}
+
+.brand-logo {
+  font-weight: 900;
+  text-transform: lowercase;
+}
+
+.weather-headline {
+  background-color: #295c90;
+  width: 100%;
+  padding: 0.5rem;
+  color: #fff;
+  border-bottom: #51779e solid 1px;
+}
+
+.weather-headline h4 {
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: lowercase;
+  font-weight: 900;
+}
+
+.blue-grey.darken-1 {
+  background: #295c90!important;
+}
+
+.card-btn {
+  font-weight: 900;
+  margin-right: 0!important;
+}
+
+.search {
+  font-size: 1.5em!important;
+  font-weight: bold;
+  color: #888;
+  background: #fff!important;
+  padding: 1rem!important;
+  margin-top: 2rem!important;
+}
+
+.btn-orange {
+  background: #e16900;
+}
+
+.btn-orange:hover,.btn-orange:active,.btn-orange:focus {
+  background: #e7954d;
+}
+
+.btn {
+  background: #e16900;
+}
+
+.btn:hover, .btn:active, .btn:focus {
+  background: #f1892d!important;
+}
+
+.btn-wide {
+  width: 100%;
+  margin-top: 0;
+  height: 4rem;
+}
+
+.city-name {
+  text-transform: capitalize;
+}
