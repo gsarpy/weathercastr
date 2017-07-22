@@ -5,6 +5,8 @@ import WeatherCard from './Components/WeatherCard';
 import Nav from './Components/Layout/Nav';
 
 const appName = "WeatherCastr";
+const apiURL = "http://api.openweathermap.org/data/2.5/weather?q=";
+const apiKey = "bb7b9d1cc6ee261c880dbe06b660e957";
 
 class App extends Component {
   constructor(props) {
@@ -12,24 +14,23 @@ class App extends Component {
 
     this.state = {
       cities: [
-        "huntington beach",
-        "95492",
-        "new york city",
-        "san francisco"
+        "san francisco",
       ]
     }
 
     this.onDelete = this.onDelete.bind(this);
-
+    this.onAddCity = this.onAddCity.bind(this);
   }
 
-  onAddCity = (item) => {
-    const updatedTodos = this.state.todos;
-    updatedTodos.push(item);
+  onAddCity = (city) => {
+    const updatedCity = this.state.cities;
+    updatedCity.push(city);
 
     this.setState({
-      todos: updatedTodos
+      cities: updatedCity
     });
+
+    this.getWeatherData(city);
   }
 
   onDelete = (city) => {
@@ -42,18 +43,36 @@ class App extends Component {
     });
   }
 
-  render() {
-    let cities = this.state.cities;
+  getWeatherData = (city) => {
+    let weatherData = {};
+    const cityName = city;
+    this.fullpath = `${apiURL}${cityName}&APPID=${apiKey}&units=imperial`.split(' ').join('+');
+    fetch(this.fullpath)
+      .then(result => result.json())
+      .then(data => weatherData)
+      .catch(e => console.log("Could not GET weather data"))
+    console.log(city);
+  }
 
-    cities = cities.map(function(city, index) {
+  componentDidMount() {
+    this.cities = this.state.cities;
+
+    this.cities = this.cities.map(function(city, index) {
+      let cityData = this.getWeatherData(city);
+
       return(
         <WeatherCard
           city={city}
           onDelete={this.onDelete}
           key={index}
+          temp={cityData}
         />
       );
     }, this);
+
+  }
+
+  render() {
 
     return (
       <div>
@@ -63,9 +82,9 @@ class App extends Component {
         <div className="container">
           <CitySearch
             placeholder="Find Weather"
-
+            onAddCity={this.onAddCity}
           />
-          <span>{cities}</span>
+          <div className="row">{this.cities}</div>
         </div>
       </div>
     );
